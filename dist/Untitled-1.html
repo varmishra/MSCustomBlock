@@ -1,0 +1,61 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        
+    </body>
+    
+    
+    <script runat="server" language="ampscript">
+        var @dataurl
+        set @dataurl = HTTPGet('https://ms-custom-block.s3.us-east-2.amazonaws.com/test.json')
+    </script>
+
+
+  <div class="content">
+   <table bgcolor="#f5f5f5" class="">
+   <tr>
+    <td>
+     </td>
+     </tr>
+    </table>
+   </div>
+<div>
+    {{.datasource MSContent source=@dataurl type=variable}}
+{{.data}}
+    {
+     "target": "@dataurl",
+     "filter" : "uid == [contactKey]"
+    }
+    {{/data}}
+ {{.datasource contacts type=nested}}
+      {{.data}}
+         {"target":"MSContent.content"}
+      {{/data}}
+
+    <div class="prod">
+    <table bgcolor="" class="social" width="100%">
+ <tr>
+     <td>
+      <p>
+       {{#if uid == [contactKey]}}<img src="{{url}}">{{/if}}
+      </p>
+     </td>
+    </tr>
+  
+    </table>
+   </div>
+    {{/datasource}}
+    {{/datasource}}
+</div>
+<div class="content">
+  <p><b>Content Recommendation Powered by Hux(c)</b>
+  </p>
+  </div>
+</html>
